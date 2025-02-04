@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~  or more contributor license agreements.  See the NOTICE file
+  ~  distributed with this work for additional information
+  ~  regarding copyright ownership.  The ASF licenses this file
+  ~  to you under the Apache License, Version 2.0 (the
+  ~  "License"); you may not use this file except in compliance
+  ~  with the License.  You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+
+<!-- Values used when running unit tests.  Specify any values in here that
+     should override the default values. -->
+
+<configuration>
+
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>target/build/test</value>
+    <description>A base for other temporary directories.</description>
+    <final>false</final>
+  </property>
+
+  <!--
+    Test file for some scale tests.
+
+    A CSV file in this bucket was used for testing S3 select.
+    Although this feature has been removed, (HADOOP-18830)
+    it is still used in some tests as a large file to read
+    and as a file in a bucket without write permissions.
+    The original file s3a://landsat-pds/scene_list.gz is
+    on a now-inaccessible bucket.
+  -->
+<!--
+  This is defined in PublicDatasetTestUtils;
+  if needed for older builds, this can copied into
+  auth-keys along with the other bucket binding information,
+  which is all exclusively defined here.
+
+  <property>
+    <name>fs.s3a.scale.test.csvfile</name>
+    <value>s3a://noaa-cors-pds/raw/2024/001/akse/AKSE001x.24_.gz</value>
+    <description>file used in scale tests</description>
+  </property>
+-->
+
+  <property>
+    <name>fs.s3a.bucket.noaa-cors-pds.endpoint.region</name>
+    <value>us-east-1</value>
+  </property>
+
+  <property>
+    <name>fs.s3a.bucket.noaa-isd-pds.multipart.purge</name>
+    <value>false</value>
+    <description>Don't try to purge uploads in the read-only bucket, as
+    it will only create log noise.</description>
+  </property>
+
+  <property>
+    <name>fs.s3a.bucket.noaa-isd-pds.probe</name>
+    <value>0</value>
+    <description>Let's postpone existence checks to the first IO operation </description>
+  </property>
+
+  <property>
+    <name>fs.s3a.bucket.noaa-isd-pds.audit.add.referrer.header</name>
+    <value>false</value>
+    <description>Do not add the referrer header</description>
+  </property>
+
+  <property>
+    <name>fs.s3a.bucket.noaa-isd-pds.prefetch.block.size</name>
+    <value>128k</value>
+    <description>Use a small prefetch size so tests fetch multiple blocks</description>
+  </property>
+
+  <!-- Per-bucket configurations: usgs-landsat -->
+  <!--
+    This is a requester-pays bucket (so validates that feature)
+    and, because it has many files, is used to validate paged file
+    listing without needing to create thousands of files.
+  -->
+
+  <property>
+    <name>fs.s3a.bucket.usgs-landsat.endpoint.region</name>
+    <value>us-west-2</value>
+  </property>
+
+  <property>
+    <name>fs.s3a.bucket.usgs-landsat.requester.pays.enabled</name>
+    <value>true</value>
+    <description>usgs-landsat requires requester pays enabled</description>
+  </property>
+
+  <property>
+    <name>fs.s3a.bucket.usgs-landsat.multipart.purge</name>
+    <value>false</value>
+    <description>Don't try to purge uploads in the read-only bucket, as
+      it will only create log noise.</description>
+  </property>
+
+  <property>
+    <name>fs.s3a.bucket.usgs-landsat.audit.add.referrer.header</name>
+    <value>false</value>
+  </property>
+
+  <!-- Per-bucket configurations: osm-pds -->
+  <property>
+    <name>fs.s3a.bucket.osm-pds.endpoint.region</name>
+    <value>us-east-1</value>
+    <description>The region for s3a://osm-pds</description>
+  </property>
+
+  <!--
+   This is the default endpoint, which can be used to interact
+   with any v2 region.
+   -->
+  <property>
+    <name>central.endpoint</name>
+    <value>s3.amazonaws.com</value>
+  </property>
+
+  <property>
+    <name>canada.endpoint</name>
+    <value>s3.ca-central-1.amazonaws.com</value>
+  </property>
+
+  <property>
+    <name>frankfurt.endpoint</name>
+    <value>s3.eu-central-1.amazonaws.com</value>
+  </property>
+
+  <property>
+    <name>ireland.endpoint</name>
+    <value>s3.eu-west-1.amazonaws.com</value>
+  </property>
+
+  <property>
+    <name>london.endpoint</name>
+    <value>s3.eu-west-2.amazonaws.com</value>
+  </property>
+
+  <property>
+    <name>mumbai.endpoint</name>
+    <value>s3.ap-south-1.amazonaws.com</value>
+  </property>
+
+  <property>
+    <name>ohio.endpoint</name>
+    <value>s3.us-east-2.amazonaws.com</value>
+  </property>
+
+  <property>
+    <name>oregon.endpoint</name>
+    <value>s3-us-west-2.amazonaws.com</value>
+  </property>
+
+  <property>
+    <name>sao-paolo.endpoint</name>
+    <value>s3-sa-east-1.amazonaws.com</value>
+  </property>
+
+  <property>
+    <name>seoul.endpoint</name>
+    <value>s3.ap-northeast-2.amazonaws.com</value>
+  </property>
+
+  <property>
+    <name>singapore.endpoint</name>
+    <value>s3-ap-southeast-1.amazonaws.com</value>
+  </property>
+
+  <property>
+    <name>sydney.endpoint</name>
+    <value>s3-ap-southeast-2.amazonaws.com</value>
+  </property>
+
+  <property>
+    <name>tokyo.endpoint</name>
+    <value>s3-ap-northeast-1.amazonaws.com</value>
+  </property>
+
+  <property>
+    <name>virginia.endpoint</name>
+    <value>${central.endpoint}</value>
+  </property>
+
+  <!-- Scale integration tests may time out on slower connections
+       you can reduce the operation count like so to mitigate this.
+  <property>
+      <name>scale.test.operation.count</name>
+      <value>500</value>
+  </property>
+  -->
+
+  <!-- Turn security off for tests by default -->
+  <property>
+    <name>hadoop.security.authentication</name>
+    <value>simple</value>
+  </property>
+
+  <!-- auditing rejects out of span operations; this ensures that
+        no regressions take place. -->
+  <property>
+    <name>fs.s3a.audit.reject.out.of.span.operations</name>
+    <value>true</value>
+  </property>
+
+  <!-- Enable IOStatisticsContext support for Thread level. -->
+  <property>
+    <name>fs.iostatistics.thread.level.enabled</name>
+    <value>true</value>
+  </property>
+
+  <property>
+    <name>fs.s3a.attempts.maximum</name>
+    <value>1</value>
+    <description>How many times should the SDK retry commands on (probably) transient errors.</description>
+  </property>
+
+  <property>
+    <name>fs.s3a.retry.limit</name>
+    <value>3</value>
+    <description>Fail fairly fast</description>
+  </property>
+
+  <!--
+  To run these tests.
+
+  # Create a file auth-keys.xml  - DO NOT ADD TO REVISION CONTROL
+  # see testing.md for details on what to set.
+  -->
+  <include xmlns="http://www.w3.org/2001/XInclude" href="auth-keys.xml">
+    <fallback/>
+  </include>
+
+</configuration>

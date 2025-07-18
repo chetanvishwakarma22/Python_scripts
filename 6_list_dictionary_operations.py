@@ -1,9 +1,5 @@
 my_list=[ 1, 2, "chetan", "sachin" ]
-my_dict={ "name": "chetan",
-          "age": 25,
-          "position": "Devops Engineer",
-          "city": "Davangere" }
-#list realated works
+# list realated works
 
 if "chetan" in my_list:
     print("Element found")
@@ -32,8 +28,13 @@ else:
 #else:
 #    print("empty")
 
+########################################
 
-#dictionary related works
+my_dict={ "name": "chetan",
+          "age": 25,
+          "position": "Devops Engineer",
+          "city": "Davangere" }
+# dictionary related works
 
 if "name" in my_dict: 
     print("key found")
@@ -70,6 +71,7 @@ if my_list[0]=="chetan":
 else:
     print("index value not found")
 
+###########################################
 
 #Boolean value operations
 

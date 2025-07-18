@@ -1,4 +1,3 @@
-
 Path of the file is : /home/ubuntu/python/hadoop-1/LICENSE.txt
 Content of the file is : 
                                  Apache License
